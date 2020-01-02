@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.bd10.zjj.dao.PhoneDao"  >
+
+
+<select id="selectCount" resultType="java.lang.Integer">
+select count(*) from bd20191226.informations
+</select>
+    <select id="list" resultType="cn.bd10.zjj.entity.Informations">
+        select * from bd20191226.informations limit #{pageNo},#{pageSize}
+    </select>
+<select id="look" resultType="cn.bd10.zjj.entity.Informations">
+    select  * from bd20191226.informations where id=#{id}
+</select>
+    <select id="look1" resultType="cn.bd10.zjj.entity.Replies">
+        select * from bd20191226.informations a,bd20191226.replies b where a.id=b.infoid and a.id=#{id}
+    </select>
+
+    <insert id="add">
+        insert into bd20191226.replies values(null,#{contents},now(),#{infoid})
+    </insert>
+    <update id="xiugai">
+        update  bd20191226.informations set viewcount=viewcount+1 where id=#{id}
+    </update>
+</mapper>
